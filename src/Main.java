@@ -25,7 +25,7 @@ public class Main {
                 tent = tent.toLowerCase();
                 if(tent.length() == 1 && tent.matches(".*[a-z].*")){
                     p.verificaLetra(tent.charAt(0));
-                    p.setFeedback(p.getAcertouLetra() ? "Letra correta! Tens " + p.getTentativas() + " tentativas" : "Letra incorreta :( Tens " + p.getTentativas() + " tentativas");
+//                    p.setFeedback(p.getAcertouLetra() ? "Letra correta! Tens " + p.getTentativas() + " tentativas" : "Letra incorreta :( Tens " + p.getTentativas() + " tentativas");
                 }
             }while(p.getTentativas() > 0 && !p.acertou());
         }

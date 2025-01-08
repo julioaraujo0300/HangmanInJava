@@ -7,6 +7,7 @@ public class Palavra {
     private char ajuda1;
     private char ajuda2;
     private  boolean acertouLetra = false;
+    private boolean emJogo = false;
 
 
 
@@ -36,6 +37,9 @@ public class Palavra {
         return acertouLetra;
     }
 
+    public void setEmJogo(boolean b){
+        emJogo = b;
+    }
     //construtor
     public Palavra(String palavraAdivinhar, int palavraTentativas, String palavraDica, char dica1, char dica2, String feed) {
         palavra = palavraAdivinhar;
@@ -47,6 +51,7 @@ public class Palavra {
         verificaLetra(ajuda1);
         verificaLetra(ajuda2);
         feedback = feed;
+        emJogo = true;
     }
 
     //funções
@@ -54,20 +59,22 @@ public class Palavra {
         acertouLetra = false;
         for (int i = 0; i < palavra.length(); i++){
             if(palavra.charAt(i) == letra){
-                if(palavraProgresso.charAt(i) == letra){
-
+                acertouLetra = true;
+                if(palavraProgresso.contains(Character.toString(letra)) && emJogo){
+                    feedback = "Essa já está pah, mas tass bem, tens " + tentativas + " tentativas";
                 }else {
-                    acertouLetra = true;
                     palavraProgresso = palavraProgresso.replaceAll("_ ", "_");
                     String temp;
                     temp = palavraProgresso.substring(0, i) + letra + palavraProgresso.substring(i + 1);
                     temp = temp.replaceAll("_", "_ ");
                     palavraProgresso = temp;
+                    feedback = "Letra correta! Tens " + tentativas + " tentativas";
                 }
             }
         }
         if(!acertouLetra){
             tentativas--;
+            feedback = "Letra incorreta :( Tens " + tentativas + " tentativas";
         }
     }
 
