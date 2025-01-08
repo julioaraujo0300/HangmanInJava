@@ -7,7 +7,9 @@ public class Palavra {
     private char ajuda1;
     private char ajuda2;
     private  boolean acertouLetra = false;
-
+    private int pontuacao;
+    private boolean emJogo = false;
+    private boolean escolhida = false;
 
 
     //setters e getters
@@ -28,12 +30,16 @@ public class Palavra {
         return  feedback;
     }
 
-    public void setFeedback(String f){
-        feedback = f;
+    public int getPontuacao(){
+        return pontuacao;
     }
 
-    public boolean getAcertouLetra(){
-        return acertouLetra;
+    public void setEmJogo(boolean b){
+        emJogo = b;
+    }
+
+    public boolean getEscolhida(){
+        return  escolhida;
     }
 
     //construtor
@@ -54,26 +60,28 @@ public class Palavra {
         acertouLetra = false;
         for (int i = 0; i < palavra.length(); i++){
             if(palavra.charAt(i) == letra){
-                if(palavraProgresso.charAt(i) == letra){
-
-                }else {
-                    acertouLetra = true;
-                    palavraProgresso = palavraProgresso.replaceAll("_ ", "_");
-                    String temp;
-                    temp = palavraProgresso.substring(0, i) + letra + palavraProgresso.substring(i + 1);
-                    temp = temp.replaceAll("_", "_ ");
-                    palavraProgresso = temp;
+                acertouLetra = true;
+                palavraProgresso = palavraProgresso.replaceAll("_ ", "_");
+                String temp;
+                temp = palavraProgresso.substring(0, i) + letra + palavraProgresso.substring(i + 1);
+                temp = temp.replaceAll("_", "_ ");
+                palavraProgresso = temp;
+                if(emJogo){
+                    pontuacao += 10;
+                    feedback = "Letra correta! Tens " + tentativas + " tentativas" + " e estás com " + pontuacao + " pontos";
                 }
             }
         }
-        if(!acertouLetra){
+        if(!acertouLetra && emJogo){
             tentativas--;
+            feedback = "Letra incorreta :( Tens " + tentativas + " tentativas";
         }
     }
 
 
     public boolean acertou(){
         if(palavra.matches(palavraProgresso)){
+            pontuacao += tentativas * 10;
             return true;
         }else{
             return false;
