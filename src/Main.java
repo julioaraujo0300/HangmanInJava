@@ -1,5 +1,4 @@
 import javax.swing.*;
-import java.awt.*;
 import  java.util.ArrayList;
 import java.io.File;
 import java.io.FileWriter;
@@ -12,16 +11,16 @@ public class Main {
 
     public static void main(String[] args) {
         String tent;
-        int nrPalavras = 5;
+        int nrPalavras = 1;
         int pontuacao = 0;
         String nomeJogador = "";
 
-        palavras.add( new Palavra("computador", 3, "informática", 'o', 'u', "Esta é fácil bro")  );
-        palavras.add( new Palavra("porto", 1, "Cidade Portuguesa", 'r', '0', "Vê lá se falhas pah")  );
+        palavras.add( new Palavra("computador", 3, "Informática", 'o', 'u', "Esta é fácil bro")  );
+        palavras.add( new Palavra("porto", 1, "Cidade", 'r', '0', "Vê lá se falhas pah")  );
         palavras.add( new Palavra("venus", 1, "Planeta", 'v', '0', "( ͡° ͜ʖ ͡°)")  );
         palavras.add( new Palavra("oftalmologista", 5, "Profissão(Saúde)", 'o', 'f', "vê lá bem")  );
-        palavras.add( new Palavra("rinoceronte", 3, "Animal", 'e', 'o', "pesado")  );
-        palavras.add( new Palavra("gabardine", 3, "Roupa", 'b', 'd', "Que briol")  );
+        palavras.add( new Palavra("rinoceronte", 3, "Animal Selvagem", 'e', 'o', "pesado")  );
+        palavras.add( new Palavra("gabardine", 3, "Peça de Roupa", 'b', 'd', "Que briol")  );
         palavras.add( new Palavra("lenovo", 2, "Marca de Computadores", 'n', '0', "Bing chilling")  );
         palavras.add( new Palavra("paralelepipedo", 6, "Não dou >:)", 'i', '0', "Boa sorte amigo")  );
 
@@ -30,6 +29,7 @@ public class Main {
             Palavra p = palavras.get(ThreadLocalRandom.current().nextInt(0, palavras.size()));
             if(!p.getEscolhida()){
                 palavrasEmJogo.add(p);
+                p.setEscolhida(true);
             }
         }while (palavrasEmJogo.size() < nrPalavras);
 
@@ -47,7 +47,7 @@ public class Main {
             pontuacao += p.getPontuacao();
         }
 
-        nomeJogador = JOptionPane.showInputDialog(null, "Final do jogo, a tua pontuação foi: " + pontuacao + " !" + " Insere o teu nome:", "Bom jogo :)" ,JOptionPane.YES_OPTION);
+        nomeJogador = JOptionPane.showInputDialog(null, "Final do jogo, a tua pontuação foi: " + pontuacao + " !" + " Insere o teu nome:", "Bom jogo :)" ,JOptionPane.DEFAULT_OPTION);
 //        JOptionPane.showMessageDialog(null, "Final do jogo, a tua pontuação foi: " + pontuacao);
 
 

@@ -42,6 +42,10 @@ public class Palavra {
         return  escolhida;
     }
 
+    public void setEscolhida(boolean b){
+        escolhida = b;
+    }
+
     //construtor
     public Palavra(String palavraAdivinhar, int palavraTentativas, String palavraDica, char dica1, char dica2, String feed) {
         palavra = palavraAdivinhar;
