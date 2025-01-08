@@ -6,7 +6,7 @@ public class Palavra {
     private String feedback;
     private char ajuda1;
     private char ajuda2;
-    private  boolean acertouLetra = false;
+    private boolean acertouLetra = false;
     private int pontuacao;
     private boolean emJogo = false;
     private boolean escolhida = false;
@@ -16,7 +16,6 @@ public class Palavra {
     public  int getTentativas(){
         return  tentativas;
     }
-
 
     public String getDica(){
         return  dica;
