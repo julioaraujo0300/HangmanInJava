@@ -13,7 +13,7 @@ public class Main {
 
     public static void main(String[] args) {
         String tent;
-        int nrPalavras = 5; // Número de palavras no jogo
+        int nrPalavras = 1; // Número de palavras no jogo
         int pontuacao = 0; // Pontuação do jogador
         String nomeJogador = "";
         
@@ -48,6 +48,8 @@ public class Main {
             } while(p.getTentativas() > 0 && !p.acertou());
             pontuacao += p.getPontuacao();
         }
+
+        nomeJogador = JOptionPane.showInputDialog(null, "Final do jogo, a tua pontuação foi: " + pontuacao + " !" + " Insere o teu nome:", "Bom jogo :)" ,JOptionPane.DEFAULT_OPTION);
 
         // Salva a pontuação do jogador no ficheiro .txt
         try {
@@ -120,18 +122,22 @@ public class Main {
                 in.close();
 
                 String json = response.toString();
-                
+
                 // Mostra a definição do JSON retornado
                 int defIndex = json.indexOf("\"definition\":\"");
                 if (defIndex != -1) {
                     int start = defIndex + 14;
                     int end = json.indexOf("\"", start);
                     return json.substring(start, end);
+                } else if (connection.getResponseCode() == 404) {
+                    System.out.println("Palavra não encontrada no dicionário: " + palavra);
+                } else {
+                    System.out.println("Erro inesperado para a palavra: " + palavra + " | Código de resposta: " + connection.getResponseCode());
                 }
             }
         } catch (Exception e) {
-            System.out.println("Erro ao obter dica para a palavra " + palavra + ": " + e.getMessage());
+            System.out.println("Erro ao obter dica para a palavra: " + palavra + " | Erro: " + e.getMessage());
         }
-        return "0"; // Retorna "0" se não encontrar a definição
+        return null; // Retorna "0" se não encontrar a definição
     }
 }
